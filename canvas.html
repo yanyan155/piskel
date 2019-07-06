@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>canvas</title>
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="bootstrap/css/open-iconic-foundation.css">
+</head>
+<body>
+    <div class="wrap d-flex flex-wrap">
+      <div class="canvas-wrap">
+        <h2>Canvas field</h2>
+        <p class="coord">
+          <span class="x-coord">coordX: 0</span>, 
+          <span class="y-coord">coordY: 0</span>
+        </p>
+        <canvas class="canvas" width="640" height="640"></canvas>
+      </div>
+      <div class="components-wrap d-flex flex-wrap">
+        <div class="canvas-size-wrap m-2">
+          <h4 class="text-center">canvas size</h4>
+          <div class="canvas-size-block btn-group btn-group-toggle flex-column m-2 border" data-toggle="buttons">
+            <label data-size="32" class="btn btn-outline-secondary text-left border-0 active">
+              <input type="radio" checked> 
+              32*32
+            </label>
+            <label data-size="64" class="btn btn-outline-secondary text-left border-0">
+              <input type="radio"> 
+              64*64
+            </label>
+            <label data-size="128" class="btn btn-outline-secondary text-left border-0">
+              <input type="radio"> 
+              128*128
+            </label>
+          </div>
+        </div>
+        <div class="choose-color-wrap m-2">
+          <h4 class="text-center">colors</h4>
+          <div class="choose-color-block btn-group btn-group-toggle flex-column m-2 border" data-toggle="buttons">
+            <label data-color="#007BFF" class="btn btn-outline-secondary text-left border-0 active"> 
+              <input type="radio" name="colors" checked> 
+              blue
+            </label>
+            <label data-color="#28A745" class="btn btn-outline-secondary text-left border-0">
+              <input type="radio" name="colors"> 
+              green
+            </label>
+            <label data-color="#DC3545" class="btn btn-outline-secondary text-left border-0">
+              <input type="radio" name="colors"> 
+              red
+            </label>
+          </div>
+        </div>
+        <div class="choose-point-size-wrap m-2">
+          <h4 class="text-center">tip size</h4>
+          <div class="choose-point-size-block btn-group btn-group-toggle flex-column m-2 border" data-toggle="buttons">
+            <label data-pointsize="1" class="btn btn-outline-secondary text-left border-0 active"> 
+              <input type="radio" name="pointSize" checked> 
+              1
+            </label>
+            <label data-pointsize="2" class="btn btn-outline-secondary text-left border-0">
+              <input type="radio" name="pointSize"> 
+              2
+            </label>
+            <label data-pointsize="3" class="btn btn-outline-secondary text-left border-0">
+              <input type="radio" name="pointSize"> 
+              3
+            </label>
+          </div>
+        </div>
+        <div class="frames-wrap m-2">
+          <h4 class="text-center">frames</h4>
+          <div class="frames-block btn-group btn-group-toggle flex-column m-2 border" data-toggle="buttons">
+            <button id="add-frame" type="button" class="btn btn-secondary add-frame">
+              <span class="fi-plus"></span> 
+              Add new frame <span class="key-letter">(G)</span>
+            </button>
+            <label id="0" class="d-flex btn btn-outline-secondary border-0 frame-element active">
+              <input type="radio" name="frames" checked>
+              <span class="mr-auto">frame 0</span>
+              <span class="fi-circle-x cursor mr-2"></span>
+              <span class="fi-layers cursor"></span>
+            </label>
+          </div>
+        </div>
+        <div class="layers-wrap m-2">
+          <h4 class="text-center">layers</h4>
+          <div class="layer-block btn-group btn-group-toggle flex-column m-2 border" data-toggle="buttons">
+            <button id="add-layer" type="button" class="btn btn-secondary add-layer">
+              <span class="fi-plus"></span> 
+              Add new layer <span class="key-letter">(H)</span>
+            </button>
+            <label id="-5" class="d-flex btn btn-outline-secondary border-0 result-layer">
+              <input type="radio" name="layers" checked>
+              <span class="mr-auto">result layer</span>
+            </label>
+            <label id="0" class="d-flex btn btn-outline-secondary border-0 layer-element active">
+              <input type="radio" name="layers" checked>
+              <span class="mr-auto">layer 0</span>
+              <span class="fi-circle-x cursor mr-2"></span>
+              <span class="fi-arrow-thick-bottom mr-2"></span>
+              <span class="fi-arrow-thick-top"></span>
+            </label>
+          </div>
+        </div>
+        <div class="tools-wrap m-2">
+          <h4 class="text-center">tools</h4>
+          <div class="tool-block btn-group btn-group-toggle flex-column m-2 border" data-toggle="buttons">
+            <label id="pen" data-tool="pen" class="btn btn-outline-secondary text-left border-0 active">
+              <input type="radio" name="pen" checked> 
+              pen <span class="key-letter">(Z)</span>
+            </label>
+            <label id="choose-color" data-tool="choose-color" class="btn btn-outline-secondary text-left border-0 ">
+              <input type="radio" name="choose color"> 
+              choose color <span class="key-letter">(X)</span>
+            </label>
+            <label id="paint-bucket" data-tool="paint-bucket" class="btn btn-outline-secondary text-left border-0 ">
+              <input type="radio" name="paint bucket"> 
+              paint bucket same color <span class="key-letter">(C)</span>
+            </label>
+            <label id="paint-bucket-all" data-tool="paint-bucket-all" class="btn btn-outline-secondary text-left border-0 ">
+              <input type="radio" name="paint bucket all"> 
+              paint bucket all canvas <span class="key-letter">(V)</span>
+            </label>
+            <label id="eraser" data-tool="eraser" class="btn btn-outline-secondary text-left border-0 ">
+              <input type="radio" name="eraser"> 
+              eraser <span class="key-letter">(B)</span>
+            </label>
+            <label id="color-picker" data-tool="color-picker" class="btn btn-outline-secondary text-left border-0 ">
+              <input type="radio" name="color-picker"> 
+              color picker <span class="key-letter">(N)</span>
+            </label>
+            <label id="stroke" data-tool="stroke" class="btn btn-outline-secondary text-left border-0 ">
+              <input type="radio" name="stroke"> 
+              stroke (shift to up/down) <span class="key-letter">(M)</span>
+            </label>
+            <label id="mirror" data-tool="mirror" class="btn btn-outline-secondary text-left border-0 ">
+              <input type="radio" name="mirror"> 
+              mirror (shift to up/down) <span class="key-letter">(A)</span>
+            </label>
+            <label id="rectangle" data-tool="rectangle" class="btn btn-outline-secondary text-left border-0 ">
+              <input type="radio" name="rectangle"> 
+              rectangle <span class="key-letter">(S)</span>
+            </label>
+            <label id="square" data-tool="square" class="btn btn-outline-secondary text-left border-0 ">
+              <input type="radio" name="square"> 
+              square <span class="key-letter">(D)</span>
+            </label>
+          </div>
+        </div>
+        <div class="preview-wrap m-2">
+          <h4 class="text-center">preview</h4>
+          <div class="preview-block d-flex flex-column m-2 border" data-toggle="buttons">
+            <div class="btn-group">
+              <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                choose fps
+              </button>
+              <div class="dropdown-menu dropdown-menu-right fps-list">
+                <button class="dropdown-item" type="button" data-fps="1">1 fps</button>
+                <button class="dropdown-item active" type="button" data-fps="2">2 fps</button>
+                <button class="dropdown-item" type="button" data-fps="3">3 fps</button>
+                <button class="dropdown-item" type="button"  data-fps="4">4 fps</button>
+                <button class="dropdown-item" type="button" data-fps="5">5 fps</button>
+                <button class="dropdown-item" type="button" data-fps="6">6 fps</button>
+                <button class="dropdown-item" type="button" data-fps="6">6 fps</button>
+                <button class="dropdown-item" type="button"  data-fps="7">7 fps</button>
+                <button class="dropdown-item" type="button" data-fps="8">8 fps</button>
+                <button class="dropdown-item" type="button" data-fps="9">9 fps</button>
+                <button class="dropdown-item" type="button" data-fps="10">10 fps</button>
+              </div>
+            </div>
+            <canvas class="preview" width="128" height="128"></canvas>
+          </div>
+        </div>
+        <div class="layers-wrap m-2">
+          <h4 class="text-center">setting</h4>
+          <button id="keyboard-setting" type="button" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModal">
+            keyboard setting
+          </button>
+        </div>
+      </div>
+      <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">keyboard setting</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+               <div class="btn-group">
+              <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                select tool/action
+              </button>
+              <div class="dropdown-menu dropdown-menu-right keyboard-block">
+                <button class="dropdown-item active" type="button" data-tool="pen">pen</button>
+                <button class="dropdown-item" type="button" data-tool="choose-color">choose-color</button>
+                <button class="dropdown-item" type="button" data-tool="paint-bucket">paint-bucket</button>
+                <button class="dropdown-item" type="button" data-tool="paint-bucket-all">paint-bucket-all</button>
+                <button class="dropdown-item" type="button" data-tool="eraser">eraser</button>
+                <button class="dropdown-item" type="button" data-tool="color-picker">color-picker</button>
+                <button class="dropdown-item" type="button" data-tool="stroke">stroke</button>
+                <button class="dropdown-item" type="button" data-tool="mirror">mirror</button>
+                <button class="dropdown-item" type="button" data-tool="rectangle">rectangle</button>
+                <button class="dropdown-item" type="button" data-tool="square">square</button>
+                <button class="dropdown-item" type="button" data-tool="add-frame">add-frame</button>
+                <button class="dropdown-item" type="button" data-tool="add-layer">add-layer</button>
+              </div>
+              <input type="text" class="set-keyboard form-control ml-2" placeholder="type HERE, letters only" aria-describedby="basic-addon1">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="bootstrap/js/jquery.js"></script> 
+    <script src="bootstrap/js/popper.js"></script>
+    <script src="bootstrap/js/bootstrap.js"></script>
+<script type="text/javascript" src="js/app.bundle.js"></script></body>
+</html>
